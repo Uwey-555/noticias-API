@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "330dba84-5c03-4775-a8bb-f156df0abc6d",
+		"name": "Noticias API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32841556"
+	},
+	"item": [
+		{
+			"name": "Buscar noticias",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function calcularFirma(secretKey) {",
+							"    const mensaje = \"\"; // String vacío",
+							"    const hmac = CryptoJS.HmacSHA256(mensaje, secretKey);",
+							"    return CryptoJS.enc.Base64.stringify(hmac);",
+							"}",
+							"",
+							"const secretKey = \"{{secretKey}}\";",
+							"if (!secretKey) {",
+							"    console.log(\"Error: La clave secreta no está definida.\");",
+							"} else {",
+							"    const firma = calcularFirma(secretKey);",
+							"    pm.environment.set(\"firma\", firma); // Guardar la firma en el entorno",
+							"",
+							"    // Agregar headers a la solicitud",
+							"    pm.request.headers.add({ key: 'X-Firma', value: firma.trim() });",
+							"    //pm.request.headers.add({ key: 'X-Api-Key', value: pm.environment.get(\"apiKey\") });",
+							"",
+							"    console.log(\"Firma calculada:\", firma);",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Api-Key",
+						"value": "{{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "X-Firma",
+						"value": "{{firma}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/consulta?q",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"consulta"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"function calcularFirma(secretKey) {",
+					"    const mensaje = \"\"; // String vacío",
+					"    const hmac = CryptoJS.HmacSHA256(mensaje, secretKey);",
+					"    return CryptoJS.enc.Base64.stringify(hmac);",
+					"}",
+					"",
+					"const secretKey = \"TU_SECRET_KEY\";",
+					"if (!secretKey) {",
+					"    console.log(\"Error: La clave secreta no está definida.\");",
+					"} else {",
+					"    const firma = calcularFirma(secretKey);",
+					"    pm.environment.set(\"firma\", firma); // Guardar la firma en el entorno",
+					"",
+					"    // Agregar headers a la solicitud",
+					"    pm.request.headers.add({ key: 'X-Firma', value: firma.trim() });",
+					"    //pm.request.headers.add({ key: 'X-Api-Key', value: pm.environment.get(\"apiKey\") });",
+					"",
+					"    console.log(\"Firma calculada:\", firma);",
+					"}",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
