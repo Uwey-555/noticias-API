@@ -1,12 +1,12 @@
 spring:
   application:
-    name: abc
+    name: bbc
 
   datasource:
     url: jdbc:sqlite:database.db
     driver-class-name: org.sqlite.JDBC
-    username: abc
-    password: abc
+    username: bbc
+    password: bbc
   sql:
     init:
       mode: always

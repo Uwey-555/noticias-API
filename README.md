@@ -12,7 +12,7 @@ git clone https://github.com/Uwey-555/noticias-API.git
 cd noticias-API
 
 # 2. Compila el proyecto
-mvn clean install
+./mvnw clean install
 
 # 3. Ejecuta la aplicación (puerto 8080 por defecto)
 

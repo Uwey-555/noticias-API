@@ -1,10 +1,10 @@
-package com.api.abc;
+package com.api.bbc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AbcApplicationTests {
+class BbcApplicationTests {
 
 	@Test
 	void contextLoads() {
